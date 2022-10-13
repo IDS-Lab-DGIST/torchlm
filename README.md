@@ -1,3 +1,4 @@
+
 ![torchlm-logo](docs/res/logo.png)    
 
 <!----
@@ -80,14 +81,14 @@
 
 
 ## 🛠️Installation
-you can install **torchlm** directly from [pypi](https://pypi.org/project/torchlm/). 
+you can install **torchlm** directly from [pypi](https://pypi.org/project/torchlm/).
 ```shell
 pip install torchlm>=0.1.6.10 # or install the latest pypi version `pip install torchlm`
 pip install torchlm>=0.1.6.10 -i https://pypi.org/simple/ # or install from specific pypi mirrors use '-i'
 ```
 or install from source if you want the latest torchlm and install it in editable mode with `-e`.
 ```shell
-git clone --depth=1 https://github.com/DefTruth/torchlm.git 
+git clone --depth=1 https://github.com/DefTruth/torchlm.git
 cd torchlm && pip install -e .
 ```
 <div id="torchlm-NOTE"></div>  
@@ -136,7 +137,7 @@ See [transforms.md](docs/api/transforms.md) for supported transforms sets and mo
 
 <summary>💡 more details about transform in torchlm </summary>  
 
-**torchlm** provides **30+** native data augmentations for landmarks and can **bind** with **80+** transforms from torchvision and albumentations through **torchlm.bind** method. The layout format of landmarks is `xy` with shape `(N, 2)`, `N` denotes the number of the input landmarks. Further, **torchlm.bind** provide a `prob` param at bind-level to force any transform or callable be a random-style augmentation. The data augmentations in **torchlm** are `safe` and `simplest`. Any transform operations at runtime cause landmarks outside will be auto dropped to keep the number of landmarks unchanged. Yes, is ok if you pass a Tensor to a np.ndarray-like transform, **torchlm** will automatically be compatible with different data types and then wrap it back to the original type through a **autodtype** wrapper. 
+**torchlm** provides **30+** native data augmentations for landmarks and can **bind** with **80+** transforms from torchvision and albumentations through **torchlm.bind** method. The layout format of landmarks is `xy` with shape `(N, 2)`, `N` denotes the number of the input landmarks. Further, **torchlm.bind** provide a `prob` param at bind-level to force any transform or callable be a random-style augmentation. The data augmentations in **torchlm** are `safe` and `simplest`. Any transform operations at runtime cause landmarks outside will be auto dropped to keep the number of landmarks unchanged. Yes, is ok if you pass a Tensor to a np.ndarray-like transform, **torchlm** will automatically be compatible with different data types and then wrap it back to the original type through a **autodtype** wrapper.
 
 <details>
 <summary> bind 80+ torchvision and albumentations's transforms </summary>  
@@ -151,7 +152,7 @@ pip uninstall albumentations  # if you have installed albumentations
 pip install albumentations # then reinstall albumentations, will also install deps, e.g opencv
 ```
 
-Then, check if albumentations is available. 
+Then, check if albumentations is available.
 ```python
 torchlm.albumentations_is_available()  # True or False
 ```
@@ -211,12 +212,12 @@ Error at LandmarksRandomTranslate() Skip, Flag: False Error Info: LandmarksRando
 LandmarksRandomTranslate() Execution Flag: False
 ```
 * Execution Flag: True means current transform was executed successful, False means it was not executed because of the random probability or some Runtime Exceptions(torchlm will should the error infos if debug mode is True).
-* AutoDtype Info: 
+* AutoDtype Info:
   * Array_InOut means current transform need a np.ndnarray as input and then output a np.ndarray.
-  * Tensor_InOut means current transform need a torch Tensor as input and then output a torch Tensor. 
-  * Array_In means current transform needs a np.ndarray input and then output a torch Tensor. 
-  * Tensor_In means current transform needs a torch Tensor input and then output a np.ndarray. 
-    
+  * Tensor_InOut means current transform need a torch Tensor as input and then output a torch Tensor.
+  * Array_In means current transform needs a np.ndarray input and then output a torch Tensor.
+  * Tensor_In means current transform needs a torch Tensor input and then output a np.ndarray.
+
   Yes, is ok if you pass a Tensor to a np.ndarray-like transform, **torchlm** will automatically be compatible with different data types and then wrap it back to the original type through a **autodtype** wrapper.
 
 </details>
@@ -251,7 +252,7 @@ model.apply_training(
     shuffle=True
 )
 ```  
-Please jump to the entry point of the function for the detail documentations of **apply_training** API for each defined models in torchlm, e.g [pipnet/_impls.py#L166](https://github.com/DefTruth/torchlm/blob/main/torchlm/models/pipnet/_impls.py#L166). You might see some logs if the training process is running: 
+Please jump to the entry point of the function for the detail documentations of **apply_training** API for each defined models in torchlm, e.g [pipnet/_impls.py#L166](https://github.com/DefTruth/torchlm/blob/main/torchlm/models/pipnet/_impls.py#L166). You might see some logs if the training process is running:
 
 ```shell
 Parameters for DataLoader:  {'batch_size': 16, 'num_workers': 4, 'shuffle': True}
@@ -322,7 +323,7 @@ model.set_custom_meanface(custom_meanface_file_or_string=custom_meanface_string)
 In **torchlm**, some pre-defined dataset converters for common use benchmark datasets are available, such as [300W](https://ibug.doc.ic.ac.uk/resources/facial-point-annotations/), [COFW](http://www.vision.caltech.edu/xpburgos/ICCV13/), [WFLW](https://wywu.github.io/projects/LAB/WFLW.html) and [AFLW](https://www.tugraz.at/institute/icg/research/team-bischof/lrs/downloads/aflw/). These converters will help you to convert the common use dataset to the standard annotation format that **torchlm** need. Here is an example of [WFLW](https://wywu.github.io/projects/LAB/WFLW.html).  
 ```python
 from torchlm.data import LandmarksWFLWConverter
-# setup your path to the original downloaded dataset from official 
+# setup your path to the original downloaded dataset from official
 converter = LandmarksWFLWConverter(
     data_dir="../data/WFLW", save_dir="../data/WFLW/converted",
     extend=0.2, rebuild=True, target_size=256, keep_aspect=False,
@@ -334,11 +335,11 @@ converter.show(count=30)  # show you some converted images with landmarks for de
 Then, the output's layout in `../data/WFLW/converted` would be look like:
 ```shell
 ├── image
-│   ├── test
-│   └── train
+│   ├── test
+│   └── train
 ├── show
-│   ├── 16--Award_Ceremony_16_Award_Ceremony_Awards_Ceremony_16_589x456y91.jpg
-│   ├── 20--Family_Group_20_Family_Group_Family_Group_20_118x458y58.jpg
+│   ├── 16--Award_Ceremony_16_Award_Ceremony_Awards_Ceremony_16_589x456y91.jpg
+│   ├── 20--Family_Group_20_Family_Group_Family_Group_20_118x458y58.jpg
 ...
 ├── test.txt
 └── train.txt
@@ -356,7 +357,7 @@ static void test_default()
   std::string onnx_path = "../../../hub/onnx/cv/FaceLandmark1000.onnx";
   std::string test_img_path = "../../../examples/lite/resources/test_lite_face_landmarks_0.png";
   std::string save_img_path = "../../../logs/test_lite_face_landmarks_1000.jpg";
-    
+
   auto *face_landmarks_1000 = new lite::cv::face::align::FaceLandmark1000(onnx_path);
 
   lite::types::Landmarks landmarks;
@@ -364,7 +365,7 @@ static void test_default()
   face_landmarks_1000->detect(img_bgr, landmarks);
   lite::utils::draw_landmarks_inplace(img_bgr, landmarks);
   cv::imwrite(save_img_path, img_bgr);
-  
+
   delete face_landmarks_1000;
 }
 ```
@@ -405,7 +406,7 @@ torchlm.runtime.bind(faceboxesv2(device="cpu"))  # set device="cuda" if you want
 torchlm.runtime.bind(
   pipnet(backbone="resnet18", pretrained=True,  
          num_nb=10, num_lms=98, net_stride=32, input_size=256,
-         meanface_type="wflw", map_location="cpu", checkpoint=None) 
+         meanface_type="wflw", map_location="cpu", checkpoint=None)
 ) # will auto download pretrained weights from latest release if pretrained=True
 landmarks, bboxes = torchlm.runtime.forward(image)
 image = torchlm.utils.draw_bboxes(image, bboxes=bboxes)
@@ -442,7 +443,7 @@ model = pipnet(backbone="resnet18", pretrained=True, num_nb=10, num_lms=98, net_
 NME, FR, AUC = model.apply_evaluating(
     annotation_path="../data/WFLW/convertd/test.txt",
     norm_indices=[60, 72],  # the indexes of two eyeballs.
-    coordinates_already_normalized=True, 
+    coordinates_already_normalized=True,
     eval_normalized_coordinates=False
 )
 print(f"NME: {NME}, FR: {FR}, AUC: {AUC}")
@@ -455,8 +456,9 @@ NME: 0.04453323229181989, FR: 0.04200000000000004, AUC: 0.5732673333333334
 ```
 
 ## ⚙️⚔️ Exporting  
-In **torchlm**, each model have a high level and user-friendly API named `apply_exporting` for ONNX export. Here is an example of [PIPNet](https://github.com/jhb86253817/PIPNet).
+In **torchlm**, each model have a high level and user-friendly API named `apply_exporting` for ONNX or Torch-TensorRT export. Here is an example of [PIPNet](https://github.com/jhb86253817/PIPNet).
 
+### ONNX
 ```python
 from torchlm.models import pipnet
 # will auto download pretrained weights from latest release if pretrained=True
@@ -466,7 +468,7 @@ model.apply_exporting(
     onnx_path="./save/pipnet/pipnet_resnet18.onnx",
     opset=12, simplify=True, output_names=None  # use default output names.
 )
-``` 
+```
 Then, you will get a Static ONNX model file if the exporting process was done.
 ```shell
   ...
@@ -483,11 +485,25 @@ Checking 0/3...
 Checking 1/3...
 Checking 2/3...
 ```
+### Torch-TensorRT
+This is an example with half precision.
+```python
+import torch
+from torchlm.models_tensorrt import pipnet
 
+# will auto download pretrained weights from latest release if pretrained=True
+model = pipnet(backbone="resnet18", pretrained=True, num_nb=10, num_lms=98, net_stride=32,
+               input_size=256, meanface_type="wflw", backbone_pretrained=True)
+
+model.apply_exporting(
+    onnx_path="./save/pipnet/pipnet_resnet18.ts",
+    precision=torch.half  # set precision to torch.half
+)
+```
 ## 📖 Documentations
-* [x] [Data Augmentation's API](docs/api/transforms.md) 
+* [x] [Data Augmentation's API](docs/api/transforms.md)
 
-## 🎓 License 
+## 🎓 License
 The code of **torchlm** is released under the MIT License.
 
 ## ❤️ Contribution
